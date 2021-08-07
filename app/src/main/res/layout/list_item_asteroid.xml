@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+                name="asteroid"
+                type="com.onething.asteroidradar.domain.model.Asteroid" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:id="@+id/lyLayoutRoot"
+            android:layout_height="wrap_content"
+            android:background="@color/black"
+            android:padding="@dimen/padding_16">
+
+        <TextView
+                android:id="@+id/tvTitle"
+                style="@style/TextAppearance.Header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{asteroid.codename}"
+                android:contentDescription="@{asteroid.codename}"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintEnd_toStartOf="@+id/ivStatus"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Name" />
+
+        <TextView
+                style="@style/TextAppearance.Subtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{asteroid.closeApproachDate}"
+                android:contentDescription="@{asteroid.closeApproachDate}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvTitle"
+                tools:text="Date" />
+
+        <ImageView
+                android:id="@+id/ivStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:statusIcon="@{asteroid.potentiallyHazardous}"
+                android:contentDescription="@string/image_of_the_status"
+                tools:src="@drawable/ic_status_normal" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
