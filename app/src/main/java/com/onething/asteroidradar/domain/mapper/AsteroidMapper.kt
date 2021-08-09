@@ -1,6 +1,8 @@
 package com.onething.asteroidradar.domain.mapper
 
+import com.onething.asteroidradar.data.model.PictureOfDayData
 import com.onething.asteroidradar.domain.model.Asteroid
+import com.onething.asteroidradar.domain.model.PictureOfDay
 import com.onething.asteroidradar.utils.getNextSevenDaysFormattedDates
 import org.json.JSONObject
 import timber.log.Timber
@@ -53,6 +55,14 @@ object AsteroidMapper {
         }
 
         return emptyList()
+    }
+
+    fun PictureOfDayData.toDomain(): PictureOfDay {
+        return PictureOfDay(
+            url = url,
+            title = title,
+            mediaType = media_type
+        )
     }
 
 }

@@ -5,6 +5,7 @@ import com.onething.asteroidradar.data.db.AsteroidDao
 import com.onething.asteroidradar.data.network.ApiService
 import com.onething.asteroidradar.domain.mapper.AsteroidMapper.toDomain
 import com.onething.asteroidradar.domain.model.Asteroid
+import com.onething.asteroidradar.domain.model.PictureOfDay
 import com.onething.asteroidradar.domain.repository.AsteroidRepository
 import com.onething.asteroidradar.utils.DataException
 import com.onething.asteroidradar.utils.Either
@@ -47,5 +48,22 @@ class AsteroidRepositoryImpl @Inject constructor(
     override suspend fun deleteAsteroidBeyondToday(date: String) {
         asteroidDao.deleteAsteroidDataBeyondToday(date)
     }
+
+    override suspend fun fetchImageOfTheDay(): Either<DataException, PictureOfDay> {
+        return try {
+            val data = apiService.fetchImageOfTheDay()
+            savePictureOfDay(data.toDomain())
+            Either.Right(data.toDomain())
+        } catch (e: Exception) {
+            Either.Left(DataException.Api(e.localizedMessage ?: "Can't fetch data."))
+        }
+    }
+
+    override fun getPictureOfDay(): LiveData<PictureOfDay?> = asteroidDao.getPictureOfDay()
+
+    override suspend fun savePictureOfDay(pictureOfDay: PictureOfDay) =
+        withContext(Dispatchers.IO) {
+            asteroidDao.insertPictureOfDay(pictureOfDay)
+        }
 
 }

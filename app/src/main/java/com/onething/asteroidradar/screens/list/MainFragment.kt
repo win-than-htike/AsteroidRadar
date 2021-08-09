@@ -1,11 +1,11 @@
 package com.onething.asteroidradar.screens.list
 
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.onething.asteroidradar.R
 import com.onething.asteroidradar.databinding.FragmentMainBinding
 import com.onething.asteroidradar.domain.model.Asteroid
@@ -39,8 +39,30 @@ class MainFragment : Fragment() {
         binding.vm = viewModel
         binding.adapter = AsteroidListAdapter(object : AsteroidItemClickListener {
             override fun onClick(item: Asteroid) {
+                findNavController().navigate(MainFragmentDirections.actionShowDetail(item))
             }
         })
+        setHasOptionsMenu(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_main, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.show_next_week_menu -> {
+                viewModel.setFilterType(AsteroidFilterType.WEEKLY)
+            }
+            R.id.show_today_menu -> {
+                viewModel.setFilterType(AsteroidFilterType.TODAY)
+            }
+            R.id.show_saved_menu -> {
+                viewModel.setFilterType(AsteroidFilterType.ALL)
+            }
+        }
+        return true
     }
 
 }

@@ -16,4 +16,16 @@
     <string name="astronomical_unit_format">%f au</string>
     <string name="km_unit_format">%f km</string>
     <string name="km_s_unit_format">%f km/s</string>
+    <string name="title_close_approach_data">Close approach date</string>
+    <string name="title_absolute_magnitude">Absolute magnitude</string>
+    <string name="title_estimated_diameter">Estimated diameter</string>
+    <string name="title_relative_velocity">Relative velocity</string>
+    <string name="info_text_help">Help Info Icon Image.</string>
+    <string name="title_distance_from_earth">Distance from earth</string>
+    <string name="astronomica_unit_explanation">The astronomical unit (au) is a unit of length, roughly the distance from Earth to the Sun and equal to about 150 million kilometres (93 million miles)</string>
+
+    <string name="next_week_asteroids">View week asteroids</string>
+    <string name="today_asteroids">View today asteroids</string>
+    <string name="saved_asteroids">View saved asteroids</string>
+
 </resources>
